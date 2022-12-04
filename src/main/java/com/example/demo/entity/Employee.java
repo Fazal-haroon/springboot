@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
     private Integer employeeId;
     private String employeeName;
@@ -11,6 +15,9 @@ public class Employee {
         this.employeeCity = employeeCity;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
     public Integer getEmployeeId() {
         return employeeId;
     }
@@ -19,6 +26,7 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
+    @Column(name = "employee_name")
     public String getEmployeeName() {
         return employeeName;
     }
@@ -26,6 +34,8 @@ public class Employee {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+
+    @Column(name = "employee_city")
 
     public String getEmployeeCity() {
         return employeeCity;
