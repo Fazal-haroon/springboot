@@ -15,6 +15,10 @@ public class Employee {
         this.employeeCity = employeeCity;
     }
 
+    public Employee() {
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)

@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Employee;
+import com.example.demo.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,37 +17,40 @@ public class EmployeeService {
             new Employee(2, "2nd Employee", "International City")
     ));
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     public List<Employee> getAllEmployee(){
-        return employeeList;
+//        return employeeList;
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployee(Integer id){
-        return employeeList.stream().filter(x -> (x.getEmployeeId() == id)).findFirst().get();
+//        return employeeList.stream().filter(x -> (x.getEmployeeId() == id)).findFirst().get();
+        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
     }
 
     public void createEmployee(Employee employee){
-        employeeList.add(employee);
+//        employeeList.add(employee);
+        employeeRepository.save(employee);
     }
 
     public void updateEmployee(Integer id,Employee employee){
-        List<Employee> tempEmployee = new ArrayList<>();
-        for (Employee employee1 : employeeList){
-            if(employee1.getEmployeeId() == id){
-                employee1.setEmployeeName(employee.getEmployeeName());
-                employee1.setEmployeeCity(employee.getEmployeeCity());
-            }
-            tempEmployee.add(employee1);
-        }
-        this.employeeList = tempEmployee;
+        Employee updateEmployee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+        updateEmployee.setEmployeeName(employee.getEmployeeName());
+        updateEmployee.setEmployeeCity(employee.getEmployeeCity());
+        employeeRepository.save(updateEmployee);
     }
 
     public void deleteEmployee(Integer id){
-        List<Employee> temp = new ArrayList<>();
-        for (Employee employee : employeeList){
-            if (employee.getEmployeeId() == id)
-                continue;
-            temp.add(employee);
-        }
-        this.employeeList = temp;
+//        List<Employee> temp = new ArrayList<>();
+//        for (Employee employee : employeeList){
+//            if (employee.getEmployeeId() == id)
+//                continue;
+//            temp.add(employee);
+//        }
+//        this.employeeList = temp;
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+        employeeRepository.delete(employee);
     }
 }
