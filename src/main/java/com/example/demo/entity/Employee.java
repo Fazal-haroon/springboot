@@ -1,23 +1,19 @@
 package com.example.demo.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "employee")
 public class Employee {
     private Integer employeeId;
     private String employeeName;
     private String employeeCity;
-
-    public Employee(Integer employeeId, String employeeName, String employeeCity) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.employeeCity = employeeCity;
-    }
-
-    public Employee() {
-
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +26,6 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    @Column(name = "employee_name")
     public String getEmployeeName() {
         return employeeName;
     }
@@ -38,8 +33,6 @@ public class Employee {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
-
-    @Column(name = "employee_city")
 
     public String getEmployeeCity() {
         return employeeCity;
