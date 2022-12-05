@@ -9,8 +9,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 @Table(name = "project")
@@ -30,5 +28,10 @@ public class Project {
         this.name = name;
         this.clientName = clientName;
         this.employees = employees;
+    }
+
+    public Project(String name, String clientName) {
+        this.name = name;
+        this.clientName = clientName;
     }
 }

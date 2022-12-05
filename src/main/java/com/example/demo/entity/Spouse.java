@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "spouse")
 public class Spouse {
@@ -31,5 +30,11 @@ public class Spouse {
         this.mobileNo = mobileNo;
         this.age = age;
         this.employee = employee;
+    }
+
+    public Spouse(String name, String mobileNo, Long age) {
+        this.name = name;
+        this.mobileNo = mobileNo;
+        this.age = age;
     }
 }

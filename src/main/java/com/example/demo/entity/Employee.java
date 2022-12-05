@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,14 +20,14 @@ public class Employee {
     private Integer employeeId;
     private String employeeName;
     private String employeeCity;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "fk_spouse")
     private Spouse spouse;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Address> addresses;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(name = "employee_project",
             joinColumns = @JoinColumn(name = "fk_employee"),
             inverseJoinColumns = @JoinColumn(name = "fk_project"))
@@ -40,6 +41,11 @@ public class Employee {
         this.projects = projects;
     }
 
+    public Employee(String employeeName, String employeeCity) {
+        this.employeeName = employeeName;
+        this.employeeCity = employeeCity;
+    }
+
     public void removeProject(Project project){
         this.projects.remove(project);
         project.getEmployees().remove(project);
@@ -48,5 +54,16 @@ public class Employee {
     public void addProject(Project project){
         this.projects.add(project);
         project.getEmployees().add(this);
+    }
+
+    public void addAddress(Address address) {
+        this.addresses = new ArrayList<>();
+        this.addresses.add(address);
+        address.setEmployee(this);
+    }
+
+    public void removeAddress(Address address) {
+        this.addresses.remove(address);
+        address.setEmployee(null);
     }
 }

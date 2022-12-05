@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "address")
 public class Address {
@@ -37,5 +36,14 @@ public class Address {
         this.state = state;
         this.country = country;
         this.employee = employee;
+    }
+
+    public Address(String line1, String line2, String zipCode, String city, String state, String country) {
+        this.line1 = line1;
+        this.line2 = line2;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.state = state;
+        this.country = country;
     }
 }
