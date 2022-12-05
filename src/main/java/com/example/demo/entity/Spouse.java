@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,7 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity
@@ -19,4 +20,16 @@ public class Spouse {
     private String name;
     private String mobileNo;
     private Long age;
+
+//    @JsonBackReference
+    @JsonIgnore
+    @OneToOne(mappedBy = "spouse")
+    private Employee employee;
+
+    public Spouse(String name, String mobileNo, Long age, Employee employee) {
+        this.name = name;
+        this.mobileNo = mobileNo;
+        this.age = age;
+        this.employee = employee;
+    }
 }

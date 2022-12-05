@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Address;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.List;
 //Singleton class
 @Service
 public class EmployeeService {
-    List<Employee> employeeList = new ArrayList<>(Arrays.asList(
-            new Employee(1, "1st Employee", "Dubai"),
-            new Employee(2, "2nd Employee", "International City")
-    ));
+//    List<Employee> employeeList = new ArrayList<>(Arrays.asList(
+//            new Employee(1, "1st Employee", "Dubai"),
+//            new Employee(2, "2nd Employee", "International City")
+//    ));
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -32,6 +33,11 @@ public class EmployeeService {
 
     public void createEmployee(Employee employee){
 //        employeeList.add(employee);
+        List<Address> addressList = new ArrayList<>();
+        for (Address address : employee.getAddresses()) {
+            addressList.add((new Address(address.getLine1(),address.getLine2(),address.getZipCode(),address.getCity(),address.getState(),address.getCountry(), employee)));
+        }
+        employee.setAddresses(addressList);
         employeeRepository.save(employee);
     }
 

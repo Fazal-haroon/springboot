@@ -3,42 +3,50 @@ package com.example.demo.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity
 @Table(name = "employee")
 public class Employee {
-    private Integer employeeId;
-    private String employeeName;
-    private String employeeCity;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
+    private Integer employeeId;
+    private String employeeName;
+    private String employeeCity;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_spouse")
+    private Spouse spouse;
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
-    public String getEmployeeName() {
-        return employeeName;
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "employee_project",
+            joinColumns = @JoinColumn(name = "fk_employee"),
+            inverseJoinColumns = @JoinColumn(name = "fk_project"))
+    private List<Project> projects;
 
-    public void setEmployeeName(String employeeName) {
+    public Employee(String employeeName, String employeeCity, Spouse spouse, List<Address> addresses, List<Project> projects) {
         this.employeeName = employeeName;
-    }
-
-    public String getEmployeeCity() {
-        return employeeCity;
-    }
-
-    public void setEmployeeCity(String employeeCity) {
         this.employeeCity = employeeCity;
+        this.spouse = spouse;
+        this.addresses = addresses;
+        this.projects = projects;
+    }
+
+    public void removeProject(Project project){
+        this.projects.remove(project);
+        project.getEmployees().remove(project);
+    }
+
+    public void addProject(Project project){
+        this.projects.add(project);
+        project.getEmployees().add(this);
     }
 }
