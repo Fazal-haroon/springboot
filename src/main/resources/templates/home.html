@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <script type="text/javascript" th:src="@{js/main.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}"/>
 </head>
 <body>
 <p>This is Home</p>
 <p>Welcome, Java <span th:text="${name}"></span></p>
 <br>
 <span th:text="${#strings.toUpperCase(name)}"></span>
+<div th:with="someVariable = ${someValue}, a = 20, b = 30">
+    <p th:text="'Value of a*b : ' + ${a} * ${b}"></p>
+    <p th:text="${someVariable}"></p>
+</div>
+<button id="click-button" onclick="main()">Click here </button>
 </body>
 </html>
