@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>each</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}"/>
+</head>
+<body>
+<div th:each="names: ${list}">
+    <p th:text="${names}"></p>
+</div>
+</body>
+</html>

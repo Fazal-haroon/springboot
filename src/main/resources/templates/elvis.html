@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Elvis is like Ternary operator</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}"/>
 </head>
 <body>
 <p th:text="${isAdmin} ? '<true> You are Admin' : '<false> You are not Admin' "></p>
+<button th:if="${isAdmin}">Admin Role</button>
+<p th:if="${gender} == 'M'">Male</p>
+<p th:unless="${gender} == 'M'">Female</p>
+<div th:switch="${gender}">
+    <p th:case="M">y'r male</p>
+    <p th:case="F">y'r female</p>
+    <p th:case="*">no gender</p>
+</div>
 </body>
 </html>
