@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "books")
 public class Books {
@@ -36,5 +43,35 @@ public class Books {
     @JoinTable(name = "books_publishers",
             joinColumns = {@JoinColumn(name = "book_id")},
             inverseJoinColumns = {@JoinColumn(name = "publisher_id")})
-    private Set<Category> publishers = new HashSet<>();
+    private Set<Publishers> publishers = new HashSet<>();
+
+    public void removePublisher(Publishers publisher){
+        this.publishers.remove(publisher);
+        publisher.getBooks().remove(publisher);
+    }
+
+    public void addPublisher(Publishers publisher) {
+        this.publishers.add(publisher);
+        publisher.getBooks().add(this);
+    }
+
+    public void removeAuthors(Authors author) {
+        this.authors.remove(author);
+        author.getBooks().remove(author);
+    }
+
+    public void addAuthors(Authors author) {
+        this.authors.add(author);
+        author.getBooks().add(this);
+    }
+
+    public void removeCategory(Category category) {
+        this.categories.remove(category);
+        category.getBooks().remove(category);
+    }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        category.getBooks().add(this);
+    }
 }
