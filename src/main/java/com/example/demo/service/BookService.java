@@ -29,4 +29,11 @@ public class BookService {
         Books book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not Found"));
         bookRepository.deleteById(book.getId());
     }
+
+    public void updateBook(Long id, Books books){
+        Books book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not Found"));
+        if(book.getId() == id){
+            bookRepository.save(books);
+        }
+    }
 }
