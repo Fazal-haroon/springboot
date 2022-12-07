@@ -25,4 +25,9 @@ public class Authors {
 
     @ManyToMany(mappedBy = "authors", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<Books> books = new HashSet<>();
+
+    public Authors(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
