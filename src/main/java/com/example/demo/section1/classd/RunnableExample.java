@@ -1,5 +1,7 @@
 package com.example.demo.section1.classd;
 
+import java.util.stream.IntStream;
+
 public class RunnableExample {
     public static void main(String[] args) {
         //Runnable Traditional Example
@@ -27,10 +29,7 @@ public class RunnableExample {
 
         //Implement using Thread with Lambda
         new Thread(() -> {
-            int sum = 0;
-            for (int i = 0; i < 10; i++) {
-                sum += i;
-            }
+            int sum = IntStream.rangeClosed(0,9).sum();
             System.out.println("Runnable Thread Lambda : "+sum);
         }).start();
     }
