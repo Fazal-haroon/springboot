@@ -1,6 +1,6 @@
-package com.example.demo.section2.classd;
+package com.example.demo.section1.classd;
 
-import com.example.demo.section2.interfaced.HelloWorldInterface;
+import com.example.demo.section1.interfaced.HelloWorldInterface;
 
 public class HelloWorldTraditional implements HelloWorldInterface {
     @Override

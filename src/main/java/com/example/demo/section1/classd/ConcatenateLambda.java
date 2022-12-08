@@ -1,6 +1,6 @@
-package com.example.demo.section2.classd;
+package com.example.demo.section1.classd;
 
-import com.example.demo.section2.interfaced.ConcatenateInterface;
+import com.example.demo.section1.interfaced.ConcatenateInterface;
 
 public class ConcatenateLambda {
     public static void main(String[] args) {
