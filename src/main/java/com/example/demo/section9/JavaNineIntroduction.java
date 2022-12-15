@@ -36,6 +36,14 @@ public class JavaNineIntroduction {
     * 4. int initialize with some number and multiple by 3 in 3shell.png
     * 5. check string example in 4shell.png
     * 6. by default import in jshell 5jshell.png
-    * 7.
+    * 7. create a list and sort then print in 6jshell.png
+    * 8. SIZE OF LIST and contain in 7jshell.png
+    * 9. math function in 8jshell.png
+    * 10. initialize two variable of int and add it, making function of name sayHelloWorld, and show the list of history in 9jshell.png
+    * 11. history of all with error statements as well in 10jshell.png
+    * 12. shortcut keys of jshell in 11jshell.png
+    * 13. creating class which name is AngularClass, create instance of this AngularClass, and call getSize method in 12jshell.png
+    * 14. edit class use /edit command and name of the class, in 13jshell.png
+    * 15. just edit size +1 then press on accept then create new instance and getsize in 14jshell.png
     * */
 }
