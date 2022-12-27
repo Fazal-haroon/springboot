@@ -10,3 +10,6 @@ VALUES (1, 'Fazal', 'Java');
 
 INSERT INTO COURSE(ID, NAME, AUTHOR)
 VALUES (2, 'Haroon', 'Spring');
+
+INSERT INTO COURSE(ID, NAME, AUTHOR)
+VALUES (3, 'Fazal Alim', 'Legends');
