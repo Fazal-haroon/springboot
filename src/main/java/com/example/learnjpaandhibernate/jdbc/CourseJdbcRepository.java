@@ -1,5 +1,6 @@
 package com.example.learnjpaandhibernate.jdbc;
 
+import com.example.learnjpaandhibernate.entity.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,10 +15,20 @@ public class CourseJdbcRepository {
     private static String INSERT_QUERY =
             """
                     INSERT INTO COURSE(ID, NAME, AUTHOR)
-                    VALUES (4, 'Abdul Hanan', 'Son');
+                    VALUES (?, ?, ?);
                     """;
 
-    public void insert() {
-        springJdbcTemplate.update(INSERT_QUERY);
+    private static String DELETE_QUERY =
+            """
+                    DELETE FROM course WHERE id = ? ;
+                    """;
+
+
+    public void insert(Course course) {
+        springJdbcTemplate.update(INSERT_QUERY, course.getId(), course.getName(), course.getAuthor());
+    }
+
+    public void deleteById(long id) {
+        springJdbcTemplate.update(DELETE_QUERY, id);
     }
 }
